@@ -1,214 +1,612 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cuéntanos tu experiencia</title>
-<style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2530;--mute:#5d6877;--line:#d9dee5;--acc:#1b6b7f;--acc-d:#14515f;--err:#b3261e;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#12161b;--card:#1a2027;--ink:#e8ecf1;--mute:#9aa6b4;--line:#2d3641;--acc:#5bb6cc;--acc-d:#82cadb;--err:#f2837c;color-scheme:dark}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:24px 16px}
-main{max-width:620px;margin:0 auto}
-header{margin-bottom:16px}
-h1{font-size:1.4rem;margin:0 0 4px}
-.meta{display:flex;justify-content:space-between;color:var(--mute);font-size:.9rem;margin-bottom:6px}
-.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;width:25%;background:var(--acc);transition:width .3s}
-form{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
-.step{display:none}.step.on{display:block}
-h2{font-size:1.15rem;margin:0 0 16px}
-.q{margin:0 0 20px;border:0;padding:0}
-.q>legend,label.l{display:block;font-weight:600;margin-bottom:8px;padding:0}
-.hint{color:var(--mute);font-size:.9rem;margin:6px 0 0}
-input[type=text],input[type=email],textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit;font:inherit}
-textarea{min-height:90px;resize:vertical}
-.opt{display:flex;gap:10px;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer}
-.opt:has(input:checked){border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,transparent)}
-.yn{display:flex;gap:8px}.yn .opt{flex:1;justify-content:center;margin:0}
-.cond{margin-top:12px;padding-left:12px;border-left:3px solid var(--acc)}
-.cond[hidden]{display:none}
-.err{color:var(--err);font-size:.9rem;min-height:1.2em;margin:0 0 8px}
-.nav{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
-button{font:inherit;font-weight:600;padding:10px 20px;border-radius:8px;border:1px solid var(--acc);cursor:pointer}
-.pri{background:var(--acc);color:#fff}.pri:hover{background:var(--acc-d)}
-.sec{background:transparent;color:var(--acc)}
-button:disabled{opacity:.6;cursor:wait}
-:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.done{text-align:center;padding:24px 0}
-</style>
-</head>
-<body>
-<main>
-<header>
-  <h1>Cuéntanos cómo te va con el complemento</h1>
-  <div class="meta"><span id="paso">Paso 1 de 4</span><span>Toma menos de 2 minutos</span></div>
-  <div class="bar" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><i id="fill"></i></div>
-</header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tu opinión sobre iBest Plena</title>
+    <style>
+      :root {
+        --bg: #f6f7f9;
+        --card: #fff;
+        --ink: #1c2530;
+        --mute: #5d6877;
+        --line: #d9dee5;
+        --acc: #1b6b7f;
+        --acc-d: #14515f;
+        --err: #b3261e;
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #12161b;
+          --card: #1a2027;
+          --ink: #e8ecf1;
+          --mute: #9aa6b4;
+          --line: #2d3641;
+          --acc: #5bb6cc;
+          --acc-d: #82cadb;
+          --err: #f2837c;
+          color-scheme: dark;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.5 system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        padding: 24px 16px;
+      }
+      main {
+        max-width: 620px;
+        margin: 0 auto;
+      }
+      header {
+        margin-bottom: 16px;
+      }
+      h1 {
+        font-size: 1.4rem;
+        margin: 0 0 4px;
+      }
+      .brand {
+        color: var(--mute);
+        font-size: 0.9rem;
+        margin: 0 0 14px;
+      }
+      .brand b {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .intro {
+        color: var(--mute);
+        margin: 0 0 14px;
+      }
+      .intro strong {
+        color: var(--ink);
+      }
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        color: var(--mute);
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+      }
+      .bar {
+        height: 8px;
+        background: var(--line);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .bar i {
+        display: block;
+        height: 100%;
+        width: 25%;
+        background: var(--acc);
+        transition: width 0.3s;
+      }
+      form {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+      }
+      .step {
+        display: none;
+      }
+      .step.on {
+        display: block;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin: 0 0 16px;
+      }
+      .q {
+        margin: 0 0 20px;
+        border: 0;
+        padding: 0;
+      }
+      .q > legend,
+      label.l {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        padding: 0;
+      }
+      .hint {
+        color: var(--mute);
+        font-size: 0.9rem;
+        margin: 6px 0 0;
+      }
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+      }
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      .opt {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-bottom: 6px;
+        cursor: pointer;
+      }
+      .opt:has(input:checked) {
+        border-color: var(--acc);
+        background: color-mix(in srgb, var(--acc) 10%, transparent);
+      }
+      .yn {
+        display: flex;
+        gap: 8px;
+      }
+      .yn .opt {
+        flex: 1;
+        justify-content: center;
+        margin: 0;
+      }
+      .cond {
+        margin-top: 12px;
+        padding-left: 12px;
+        border-left: 3px solid var(--acc);
+      }
+      .cond[hidden] {
+        display: none;
+      }
+      .err {
+        color: var(--err);
+        font-size: 0.9rem;
+        min-height: 1.2em;
+        margin: 0 0 8px;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      button {
+        font: inherit;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: 1px solid var(--acc);
+        cursor: pointer;
+      }
+      .pri {
+        background: var(--acc);
+        color: #fff;
+      }
+      .pri:hover {
+        background: var(--acc-d);
+      }
+      .sec {
+        background: transparent;
+        color: var(--acc);
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      :focus-visible {
+        outline: 3px solid var(--acc);
+        outline-offset: 2px;
+      }
+      .done {
+        text-align: center;
+        padding: 24px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="brand">
+          iBest <b>Plena</b> · Planificación y análisis integral (xP&amp;A)
+        </p>
+        <h1 id="saludo">Hola, ¿cómo te va con Plena?</h1>
+        <p class="intro" id="intro">
+          Tu opinión nos ayuda a corregir fallas y priorizar las próximas
+          mejoras.
+        </p>
+        <div class="meta">
+          <span id="paso">Paso 1 de 3</span><span>Toma menos de 2 minutos</span>
+        </div>
+        <div
+          class="bar"
+          role="progressbar"
+          aria-valuemin="1"
+          aria-valuemax="3"
+          aria-valuenow="1"
+        >
+          <i id="fill"></i>
+        </div>
+      </header>
 
-<form id="f" novalidate>
-<input type="hidden" name="user_id" id="user_id">
+      <form id="f" novalidate>
+        <input type="hidden" name="user_id" id="user_id" />
 
-<section class="step on" data-step="1">
-  <h2>Tus datos (opcional)</h2>
-  <div class="q"><label class="l" for="nombre">Nombre completo</label><input type="text" id="nombre" autocomplete="name"></div>
-  <div class="q"><label class="l" for="correo">Correo electrónico</label><input type="email" id="correo" autocomplete="email">
-    <p class="hint">Tu correo solo lo usaremos si necesitamos responderte sobre alguna falla que nos reportes.</p></div>
-</section>
+        <section class="step on" data-step="1">
+          <h2>Fallas, equipo y rapidez</h2>
 
-<section class="step" data-step="2">
-  <h2>Fallas, equipo y rapidez</h2>
+          <fieldset class="q" data-q="fallas" data-show="Sí">
+            <legend>
+              ¿Has tenido algún problema, error o el programa se te ha cerrado
+              inesperadamente?
+            </legend>
+            <div class="yn">
+              <label class="opt"
+                ><input type="radio" name="fallas" value="Sí" />Sí</label
+              ><label class="opt"
+                ><input type="radio" name="fallas" value="No" />No</label
+              >
+            </div>
+            <div class="cond" hidden>
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="fallas_op"
+                  value="El programa se cierra solo"
+                />El programa se cierra solo</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="fallas_op"
+                  value="Aparece un mensaje de error"
+                />Aparece un mensaje de error</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="fallas_op"
+                  value="No cargan los botones"
+                />No cargan los botones</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="fallas_op"
+                  value="Falla al guardar o procesar"
+                />Falla al guardar o procesar</label
+              >
+              <label class="l" for="fallas_txt"
+                >¿Qué estabas intentando hacer cuando ocurrió el error?</label
+              ><textarea id="fallas_txt"></textarea>
+            </div>
+          </fieldset>
 
-  <fieldset class="q" data-q="fallas" data-show="Sí">
-    <legend>¿Has tenido algún problema, error o el programa se te ha cerrado inesperadamente?</legend>
-    <div class="yn"><label class="opt"><input type="radio" name="fallas" value="Sí">Sí</label><label class="opt"><input type="radio" name="fallas" value="No">No</label></div>
-    <div class="cond" hidden>
-      <label class="opt"><input type="checkbox" name="fallas_op" value="El programa se cierra solo">El programa se cierra solo</label>
-      <label class="opt"><input type="checkbox" name="fallas_op" value="Aparece un mensaje de error">Aparece un mensaje de error</label>
-      <label class="opt"><input type="checkbox" name="fallas_op" value="No cargan los botones">No cargan los botones</label>
-      <label class="opt"><input type="checkbox" name="fallas_op" value="Falla al guardar o procesar">Falla al guardar o procesar</label>
-      <label class="l" for="fallas_txt">¿Qué estabas intentando hacer cuando ocurrió el error?</label><textarea id="fallas_txt"></textarea>
-    </div>
-  </fieldset>
+          <fieldset class="q" data-q="equipo" data-show="No">
+            <legend>
+              ¿Plena funciona bien en tu computadora, pantalla y con tus otros
+              programas?
+            </legend>
+            <div class="yn">
+              <label class="opt"
+                ><input type="radio" name="equipo" value="Sí" />Sí</label
+              ><label class="opt"
+                ><input type="radio" name="equipo" value="No" />No</label
+              >
+            </div>
+            <div class="cond" hidden>
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="equipo_op"
+                  value="Se ve muy pequeño o desajustado en mi pantalla"
+                />Se ve muy pequeño o desajustado en mi pantalla</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="equipo_op"
+                  value="No funciona bien desde que actualicé mi sistema o programa"
+                />No funciona bien desde que actualicé mi sistema o
+                programa</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="equipo_op"
+                  value="Da problemas si uso dos monitores"
+                />Da problemas si uso dos monitores</label
+              >
+              <label class="l" for="equipo_txt"
+                >Cuéntanos qué problema tuviste en tu equipo:</label
+              ><textarea id="equipo_txt"></textarea>
+            </div>
+          </fieldset>
 
-  <fieldset class="q" data-q="equipo" data-show="No">
-    <legend>¿El complemento funciona bien en tu computadora, pantalla y con tus otros programas?</legend>
-    <div class="yn"><label class="opt"><input type="radio" name="equipo" value="Sí">Sí</label><label class="opt"><input type="radio" name="equipo" value="No">No</label></div>
-    <div class="cond" hidden>
-      <label class="opt"><input type="checkbox" name="equipo_op" value="Se ve muy pequeño o desajustado en mi pantalla">Se ve muy pequeño o desajustado en mi pantalla</label>
-      <label class="opt"><input type="checkbox" name="equipo_op" value="No funciona bien desde que actualicé mi sistema o programa">No funciona bien desde que actualicé mi sistema o programa</label>
-      <label class="opt"><input type="checkbox" name="equipo_op" value="Da problemas si uso dos monitores">Da problemas si uso dos monitores</label>
-      <label class="l" for="equipo_txt">Cuéntanos qué problema tuviste en tu equipo:</label><textarea id="equipo_txt"></textarea>
-    </div>
-  </fieldset>
+          <fieldset class="q" data-q="lento" data-show="Sí">
+            <legend>
+              ¿Has notado que el programa se pone lento o hace más lenta tu
+              computadora mientras lo usas?
+            </legend>
+            <div class="yn">
+              <label class="opt"
+                ><input type="radio" name="lento" value="Sí" />Sí</label
+              ><label class="opt"
+                ><input type="radio" name="lento" value="No" />No</label
+              >
+            </div>
+            <div class="cond" hidden>
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="lento_op"
+                  value="Hace que mi computadora vaya lenta"
+                />Hace que mi computadora vaya lenta</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="lento_op"
+                  value="Tarda mucho en abrir"
+                />Tarda mucho en abrir</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="lento_op"
+                  value="Se congela por unos segundos"
+                />Se congela por unos segundos</label
+              >
+              <label class="l" for="lento_txt"
+                >Cuéntanos más sobre esta lentitud:</label
+              ><textarea id="lento_txt"></textarea>
+            </div>
+          </fieldset>
+        </section>
 
-  <fieldset class="q" data-q="lento" data-show="Sí">
-    <legend>¿Has notado que el programa se pone lento o hace más lenta tu computadora mientras lo usas?</legend>
-    <div class="yn"><label class="opt"><input type="radio" name="lento" value="Sí">Sí</label><label class="opt"><input type="radio" name="lento" value="No">No</label></div>
-    <div class="cond" hidden>
-      <label class="opt"><input type="checkbox" name="lento_op" value="Hace que mi computadora vaya lenta">Hace que mi computadora vaya lenta</label>
-      <label class="opt"><input type="checkbox" name="lento_op" value="Tarda mucho en abrir">Tarda mucho en abrir</label>
-      <label class="opt"><input type="checkbox" name="lento_op" value="Se congela por unos segundos">Se congela por unos segundos</label>
-      <label class="l" for="lento_txt">Cuéntanos más sobre esta lentitud:</label><textarea id="lento_txt"></textarea>
-    </div>
-  </fieldset>
-</section>
+        <section class="step" data-step="2">
+          <h2>Nuevas funciones e ideas</h2>
+          <fieldset class="q" data-q="ideas" data-show="Sí">
+            <legend>
+              ¿Te gustaría proponernos alguna mejora o nueva herramienta para
+              hacer tu trabajo más fácil?
+            </legend>
+            <div class="yn">
+              <label class="opt"
+                ><input type="radio" name="ideas" value="Sí" />Sí</label
+              ><label class="opt"
+                ><input type="radio" name="ideas" value="No" />No</label
+              >
+            </div>
+            <div class="cond" hidden>
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="ideas_op"
+                  value="Que sea más rápido"
+                />Que sea más rápido</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="ideas_op"
+                  value="Botones o atajos más sencillos"
+                />Botones o atajos más sencillos</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="ideas_op"
+                  value="Nuevos reportes o exportaciones"
+                />Nuevos reportes o exportaciones</label
+              >
+              <label class="opt"
+                ><input
+                  type="checkbox"
+                  name="ideas_op"
+                  value="Diseños visuales más limpios"
+                />Diseños visuales más limpios</label
+              >
+              <label class="l" for="ideas_txt"
+                >Describe la idea o función que te gustaría ver:</label
+              ><textarea id="ideas_txt"></textarea>
+            </div>
+          </fieldset>
+        </section>
 
-<section class="step" data-step="3">
-  <h2>Nuevas funciones e ideas</h2>
-  <fieldset class="q" data-q="ideas" data-show="Sí">
-    <legend>¿Te gustaría proponernos alguna mejora o nueva herramienta para hacer tu trabajo más fácil?</legend>
-    <div class="yn"><label class="opt"><input type="radio" name="ideas" value="Sí">Sí</label><label class="opt"><input type="radio" name="ideas" value="No">No</label></div>
-    <div class="cond" hidden>
-      <label class="opt"><input type="checkbox" name="ideas_op" value="Que sea más rápido">Que sea más rápido</label>
-      <label class="opt"><input type="checkbox" name="ideas_op" value="Botones o atajos más sencillos">Botones o atajos más sencillos</label>
-      <label class="opt"><input type="checkbox" name="ideas_op" value="Nuevos reportes o exportaciones">Nuevos reportes o exportaciones</label>
-      <label class="opt"><input type="checkbox" name="ideas_op" value="Diseños visuales más limpios">Diseños visuales más limpios</label>
-      <label class="l" for="ideas_txt">Describe la idea o función que te gustaría ver:</label><textarea id="ideas_txt"></textarea>
-    </div>
-  </fieldset>
-</section>
+        <section class="step" data-step="3">
+          <h2>Cierre</h2>
+          <div class="q">
+            <label class="l" for="final_txt"
+              >¿Tienes algún otro comentario o sugerencia final?</label
+            ><textarea id="final_txt"></textarea>
+          </div>
+          <p class="hint" style="margin: 0 0 12px">
+            ¿Quieres que te contactemos sobre lo que reportaste? Déjanos tus
+            datos (opcional).
+          </p>
+          <div class="q">
+            <label class="l" for="nombre">Nombre completo</label
+            ><input type="text" id="nombre" autocomplete="name" />
+          </div>
+          <div class="q">
+            <label class="l" for="correo">Correo electrónico</label
+            ><input type="email" id="correo" autocomplete="email" />
+            <p class="hint">
+              Solo lo usaremos para responderte sobre alguna falla que nos
+              reportes.
+            </p>
+          </div>
+        </section>
 
-<section class="step" data-step="4">
-  <h2>Cierre</h2>
-  <div class="q"><label class="l" for="final_txt">¿Tienes algún otro comentario o sugerencia final?</label><textarea id="final_txt"></textarea></div>
-  <p class="hint">¡Gracias! Tus ideas nos ayudarán a lanzar la próxima actualización.</p>
-</section>
+        <p class="err" id="err" role="alert"></p>
+        <div class="nav">
+          <button type="button" class="sec" id="back" hidden>Atrás</button>
+          <button type="button" class="pri" id="next" style="margin-left: auto">
+            Siguiente
+          </button>
+        </div>
+      </form>
 
-<p class="err" id="err" role="alert"></p>
-<div class="nav">
-  <button type="button" class="sec" id="back" hidden>Atrás</button>
-  <button type="button" class="pri" id="next" style="margin-left:auto">Siguiente</button>
-</div>
-</form>
+      <div class="done" id="done" hidden>
+        <h2 id="gracias">¡Gracias por tu opinión!</h2>
+        <p>
+          Ya recibimos tus respuestas. Las usaremos para mejorar la próxima
+          actualización.
+        </p>
+      </div>
+    </main>
 
-<div class="done" id="done" hidden>
-  <h2>¡Gracias por tu opinión!</h2>
-  <p>Ya recibimos tus respuestas. Las usaremos para mejorar la próxima actualización.</p>
-</div>
-</main>
+    <script>
+      // ⚙️ Cambia esta URL por la de tu backend FastAPI (debe ser HTTPS)
+      //const API_URL = "https://TU-BACKEND.example.com/api/feedback";
+      const API_URL = "https://apiformfeedback.vercel.app/api/feedback";
+      const TOTAL = 3;
+      let cur = 1;
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-<script>
-// ⚙️ Cambia esta URL por la de tu backend FastAPI (debe ser HTTPS)
-//const API_URL = "https://TU-BACKEND.example.com/api/feedback";
-const API_URL = "https://apiformfeedback.vercel.app/api/feedback";
-const TOTAL = 4;
-let cur = 1;
-const $ = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      // Plena abre la página con ?user_id=DOMINIO\usuario&modulo=Contabilidad&ver=1.0.1.1
+      const params = new URLSearchParams(location.search);
+      const corto = (v, n) => (v || "").trim().slice(0, n);
+      $("#user_id").value = corto(
+        params.get("user_id") || params.get("usuario"),
+        100,
+      );
+      const MODULO = corto(params.get("modulo"), 50);
+      const VERSION = corto(params.get("ver"), 20);
 
-// El add-in puede abrir la página con ?user_id=XXXX
-const params = new URLSearchParams(location.search);
-$("#user_id").value = params.get("user_id") || params.get("usuario") || "";
+      // Saludo: muestra solo el usuario, sin el dominio (DOMINIO\jperez -> jperez).
+      // Se usa textContent, nunca innerHTML, para no inyectar lo que venga en la URL.
+      const nombreCorto = $("#user_id").value.split("\\").pop();
+      if (nombreCorto) {
+        $("#saludo").textContent =
+          `Hola ${nombreCorto}, ¿cómo te va con Plena?`;
+        $("#gracias").textContent = `¡Gracias, ${nombreCorto}!`;
+      }
+      if (MODULO) {
+        const intro = $("#intro");
+        intro.textContent =
+          "Tu opinión nos ayuda a corregir fallas y priorizar mejoras del módulo ";
+        intro.append(
+          Object.assign(document.createElement("strong"), {
+            textContent: MODULO,
+          }),
+        );
+        intro.append(".");
+      }
 
-function show(n) {
-  cur = n;
-  $$(".step").forEach(s => s.classList.toggle("on", +s.dataset.step === n));
-  $("#paso").textContent = `Paso ${n} de ${TOTAL}`;
-  $("#fill").style.width = (n / TOTAL * 100) + "%";
-  $(".bar").setAttribute("aria-valuenow", n);
-  $("#back").hidden = n === 1;
-  $("#next").textContent = n === TOTAL ? "Enviar opinión" : "Siguiente";
-  $("#err").textContent = "";
-  scrollTo({ top: 0 });
-}
+      function show(n) {
+        cur = n;
+        $$(".step").forEach((s) =>
+          s.classList.toggle("on", +s.dataset.step === n),
+        );
+        $("#paso").textContent = `Paso ${n} de ${TOTAL}`;
+        $("#fill").style.width = (n / TOTAL) * 100 + "%";
+        $(".bar").setAttribute("aria-valuenow", n);
+        $("#back").hidden = n === 1;
+        $("#next").textContent = n === TOTAL ? "Enviar opinión" : "Siguiente";
+        $("#err").textContent = "";
+        scrollTo({ top: 0 });
+      }
 
-// Lógica condicional: solo se muestran las preguntas secundarias cuando corresponde
-$$("fieldset[data-q]").forEach(fs => {
-  fs.addEventListener("change", e => {
-    if (e.target.type !== "radio") return;
-    const open = e.target.value === fs.dataset.show;
-    const box = $(".cond", fs);
-    box.hidden = !open;
-    if (!open) { $$("input[type=checkbox]", box).forEach(c => c.checked = false); $("textarea", box).value = ""; }
-  });
-});
+      // Lógica condicional: solo se muestran las preguntas secundarias cuando corresponde
+      $$("fieldset[data-q]").forEach((fs) => {
+        fs.addEventListener("change", (e) => {
+          if (e.target.type !== "radio") return;
+          const open = e.target.value === fs.dataset.show;
+          const box = $(".cond", fs);
+          box.hidden = !open;
+          if (!open) {
+            $$("input[type=checkbox]", box).forEach((c) => (c.checked = false));
+            $("textarea", box).value = "";
+          }
+        });
+      });
 
-function validate() {
-  const err = $("#err");
-  if (cur === 1) {
-    const c = $("#correo").value.trim();
-    if (c && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)) { err.textContent = "Revisa tu correo: parece que le falta algo."; return false; }
-  }
-  const missing = $$(".step.on fieldset[data-q]").filter(fs => !$("input[type=radio]:checked", fs));
-  if (missing.length) { err.textContent = "Por favor responde Sí o No en todas las preguntas."; missing[0].scrollIntoView({ block: "center" }); return false; }
-  return true;
-}
+      function validate() {
+        const err = $("#err");
+        if (cur === TOTAL) {
+          const c = $("#correo").value.trim();
+          if (c && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)) {
+            err.textContent = "Revisa tu correo: parece que le falta algo.";
+            return false;
+          }
+        }
+        const missing = $$(".step.on fieldset[data-q]").filter(
+          (fs) => !$("input[type=radio]:checked", fs),
+        );
+        if (missing.length) {
+          err.textContent =
+            "Por favor responde Sí o No en todas las preguntas.";
+          missing[0].scrollIntoView({ block: "center" });
+          return false;
+        }
+        return true;
+      }
 
-function block(q) {
-  const r = $(`input[name=${q}]:checked`);
-  return {
-    respuesta: r ? r.value : null,
-    opciones: $$(`input[name=${q}_op]:checked`).map(c => c.value),
-    detalle: ($(`#${q}_txt`)?.value || "").trim() || null
-  };
-}
+      function block(q) {
+        const r = $(`input[name=${q}]:checked`);
+        return {
+          respuesta: r ? r.value : null,
+          opciones: $$(`input[name=${q}_op]:checked`).map((c) => c.value),
+          detalle: ($(`#${q}_txt`)?.value || "").trim() || null,
+        };
+      }
 
-async function send() {
-  const btn = $("#next");
-  btn.disabled = true; btn.textContent = "Enviando…";
-  const payload = {
-    user_id: $("#user_id").value || null,
-    nombre: $("#nombre").value.trim() || null,
-    correo: $("#correo").value.trim() || null,
-    fallas: block("fallas"), equipo: block("equipo"), lento: block("lento"), ideas: block("ideas"),
-    comentario_final: $("#final_txt").value.trim() || null
-  };
-  try {
-    const res = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-    if (!res.ok) throw new Error(res.status);
-    $("#f").hidden = true; $(".meta").hidden = true; $(".bar").hidden = true;
-    $("#done").hidden = false;
-  } catch (e) {
-    $("#err").textContent = "No pudimos enviar tus respuestas. Revisa tu conexión e inténtalo de nuevo.";
-    btn.disabled = false; btn.textContent = "Enviar opinión";
-  }
-}
+      async function send() {
+        const btn = $("#next");
+        btn.disabled = true;
+        btn.textContent = "Enviando…";
+        const payload = {
+          user_id: $("#user_id").value || null,
+          modulo: MODULO || null,
+          version: VERSION || null,
+          nombre: $("#nombre").value.trim() || null,
+          correo: $("#correo").value.trim() || null,
+          fallas: block("fallas"),
+          equipo: block("equipo"),
+          lento: block("lento"),
+          ideas: block("ideas"),
+          comentario_final: $("#final_txt").value.trim() || null,
+        };
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error(res.status);
+          $("#f").hidden = true;
+          $(".meta").hidden = true;
+          $(".bar").hidden = true;
+          $("#done").hidden = false;
+        } catch (e) {
+          $("#err").textContent =
+            "No pudimos enviar tus respuestas. Revisa tu conexión e inténtalo de nuevo.";
+          btn.disabled = false;
+          btn.textContent = "Enviar opinión";
+        }
+      }
 
-$("#next").addEventListener("click", () => { if (!validate()) return; cur < TOTAL ? show(cur + 1) : send(); });
-$("#back").addEventListener("click", () => show(cur - 1));
-$("#f").addEventListener("submit", e => e.preventDefault());
-show(1);
-</script>
-</body>
+      $("#next").addEventListener("click", () => {
+        if (!validate()) return;
+        cur < TOTAL ? show(cur + 1) : send();
+      });
+      $("#back").addEventListener("click", () => show(cur - 1));
+      $("#f").addEventListener("submit", (e) => e.preventDefault());
+      show(1);
+    </script>
+  </body>
 </html>
